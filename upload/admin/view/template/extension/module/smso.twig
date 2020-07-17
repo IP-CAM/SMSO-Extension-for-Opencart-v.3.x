@@ -1,0 +1,241 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning is not empty %}
+        	
+        	{% for error in error_warning %}
+            	<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error.error }}
+                	<button type="button" class="close" data-dismiss="alert">&times;</button>
+            	</div>
+            {% endfor %}
+
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3> 
+            </div>
+            <div class="s-w">
+
+            {% if smso_test_result is not empty %}
+	            <div class="alert alert-warning smso-alert smso-alert-success alert-dismissible show" role="alert">
+					The test is successful!				<a href="http://new14.devsck.ro/wp-admin/admin.php?page=smso&amp;close-message=true" type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</a>
+				</div>
+			{% endif %}
+			
+            <div class="s-h">
+             	<img class="smso-h-l" src="{{ smso_logo }}" alt="SMSO">
+            </div>
+            <div class="s-b">
+	 		 <div class="group">
+	 		 	<label><p>Steps</p></label>
+	 		 	<ul>
+	 		 		<li><span class="tag">1</span><p>Create an account on : <span><a href="https://app.smso.ro/register">SMSO</a></span></p></li>
+	 		 		<li><span class="tag">2</span><p>Add credit to your SMSO account</p></li>
+	 		 		<li><span class="tag">3</span><p>Get Token for access from here : <a href="https://app.smso.ro/developers/api">Token</a></p></li>
+	 		 		<li><span class="tag">4</span><p>Configure settings below</p></li>
+	 		 	</ul>
+	 		 </div>
+	 		</div>
+	 		</div>
+            <div class="panel-body s-w">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-first-module" class="form-horizontal">
+                   {% if smso_token is not empty %}
+	                    <div class="group">
+	                        <label>{{ btn_test_text }}</label>
+							<input type="text" name="smso_test_phone_number" value="{{ smso_test_phone_number is not empty ?  smso_test_phone_number : '' }}" placeholder="{{ btn_test_placeholder }}">
+							 <div class="description">
+								<p>{{ btn_test_description }}</p>
+							</div>
+							<input type="submit" name="smso_test" value="{{ btn_test_send }}">
+	                    </div>
+                    {% endif %}
+                  	<div class="group">
+						<div class="g">
+							<label>{{ btn_activate_text }}</label>						 
+							<input type="checkbox" name="smso_active" value="true" {{ smso_active == true ?  'checked="checked"' : '' }}>
+						</div>			 
+					</div>
+					<div class="group">
+						<label>{{ btn_token_text }}</label>
+						<input type="text" name="smso_token" value="{{ smso_token ? smso_token : '' }}" placeholder="{{ btn_token_placeholder }}">
+						 <div class="description">
+		  					<p>{{ btn_token_description }}</p>
+		  				</div>
+					</div>
+
+					{% if smso_token is not empty %}
+						<div class="group">
+							<label>Sender list</label>
+							{% if smso_sender_list is not empty %}
+								<div class="list">
+								    {% for key, value in smso_sender_list %}
+								       <div class="group-radio">
+											<input type="radio" name="smso_sender" value="{{value.value}}" {{ smso_sender == value.value ?  'checked="checked"' : '' }}>
+											<span>{{value.label}}</span>
+										</div>
+								    {% endfor %} 
+								</div>
+							{% else %}
+								<div class="list">
+									Empty sender list
+								</div>
+							{% endif %}		 
+				  			<div class="description">
+				  				<p>Sender list from SMSO</p>
+				  			</div>
+						</div>
+					{% endif %}	
+
+					<div class="group">
+						<label>{{btn_status_order_canceled}}</label>
+						<input type="checkbox" name="smso_canceled_active" value="true" {{ smso_canceled_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_canceled_message" value="{{ smso_canceled_message == true ? smso_canceled_message : '' }}">{{ smso_canceled_message == true ?  smso_canceled_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_canceled_reversal}}</label>
+						<input type="checkbox" name="smso_canceled_reversal_active" value="true" {{ smso_canceled_reversal_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_canceled_reversal_message" value="{{ smso_canceled_reversal_message == true ?  smso_canceled_reversal_message : '' }}">{{ smso_canceled_reversal_message == true ?  smso_canceled_reversal_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_chargebackd}}</label>
+						<input type="checkbox" name="smso_chargeback_active" value="true" {{ smso_chargeback_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_chargeback_message" value="{{ smso_chargeback_message == true ?  smso_chargeback_message : '' }}">{{ smso_chargeback_message == true ?  smso_chargeback_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_complete}}</label>
+						<input type="checkbox" name="smso_complete_active" value="true" {{ smso_complete_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_complete_message" value="{{ smso_complete_message == true ?  smso_complete_message : '' }}">{{ smso_complete_message == true ?  smso_complete_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_denied}}</label>
+						<input type="checkbox" name="smso_denied_active" value="true" {{ smso_denied_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_denied_message" value="{{ smso_denied_message == true ?  smso_denied_message : '' }}">{{ smso_denied_message == true ?  smso_denied_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_refunded}}</label>
+						<input type="checkbox" name="smso_refunded_active" value="true" {{ smso_refunded_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_refunded_message" value="{{ smso_refunded_message == true ?  smso_refunded_message : '' }}">{{ smso_refunded_message == true ?  smso_refunded_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_expired}}</label>
+						<input type="checkbox" name="smso_expired_active" value="true" {{ smso_expired_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_expired_message" value="{{ smso_expired_message == true ?  smso_expired_message : '' }}">{{ smso_expired_message == true ?  smso_expired_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_failed}}</label>
+						<input type="checkbox" name="smso_failed_active" value="true" {{ smso_failed_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_failed_message" value="{{ smso_failed_message == true ?  smso_failed_message : '' }}">{{ smso_failed_message == true ?  smso_failed_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_pending}}</label>
+						<input type="checkbox" name="smso_pending_active" value="true" {{ smso_pending_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_pending_message" value="{{ smso_pending_message == true ?  smso_pending_message : '' }}">{{ smso_pending_message == true ?  smso_pending_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_processed}}</label>
+						<input type="checkbox" name="smso_processed_active" value="true" {{ smso_processed_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_processed_message" value="{{ smso_processed_message == true ?  smso_processed_message : '' }}">{{ smso_processed_message == true ?  smso_processed_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_processing}}</label>
+						<input type="checkbox" name="smso_processing_active" value="true" {{ smso_processing_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_processing_message" value="{{ smso_processing_message == true ?  smso_processing_message : '' }}">{{ smso_processing_message == true ?  smso_processing_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_refunded}}</label>
+						<input type="checkbox" name="smso_refunded_active" value="true" {{ smso_refunded_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_refunded_message" value="{{ smso_refunded_message == true ?  smso_refunded_message : '' }}">{{ smso_refunded_message == true ?  smso_refunded_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_reversed}}</label>
+						<input type="checkbox" name="smso_reversed_active" value="true" {{ smso_reversed_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_reversed_message" value="{{ smso_reversed_message == true ?  smso_reversed_message : '' }}">{{ smso_reversed_message == true ?  smso_reversed_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_shipped}}</label>
+						<input type="checkbox" name="smso_shipped_active" value="true" {{ smso_shipped_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_shipped_message" value="{{ smso_shipped_message == true ?  smso_shipped_message : '' }}">{{ smso_shipped_message == true ?  smso_shipped_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+
+					<div class="group">
+						<label>{{btn_status_order_voided}}</label>
+						<input type="checkbox" name="smso_voided_active" value="true" {{ smso_voided_active == true ?  'checked="checked"' : '' }}>
+						<textarea name="smso_voided_message" value="{{ smso_voided_message == true ?  smso_voided_message : '' }}">{{ smso_voided_message == true ?  smso_voided_message : '' }}</textarea>
+						<div class="description">
+							<p>{{btn_status_order_description}}</p>
+						</div>
+					</div>
+                    <input type="submit" name="smso_save_settings" value="{{ btn_token_save_all }}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+{{ footer }}
