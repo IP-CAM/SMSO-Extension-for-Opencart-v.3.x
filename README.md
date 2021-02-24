@@ -1,52 +1,51 @@
-<h2>SMSO Opencart 3.x</h2>
+<H2> SMSO OpenCart 3.x </ h2>
 
-<h3>Functionalitati</h3>
-<strong>Modulul ofera urmatoarele functionalitati:</strong>
+<h3> Functions </ h3>
+<Strong> The module offers the following functionalities: </ strong>
 
-Trimite un SMS catre client in urma urmatoarelor statusuri de comanda:
-<ul>
-  <li>comanda plasata cu succes</li>
-  <li>comanda in procesare</li>
-  <li>comanda livrata</li>
-  <li>comanda platita</li>
-  <li>comanda anulata</li>
-  <li>comanda finalizata</li>
-  <li>comanda returnata</li>
-  <li>comanda procesata</li>
-  <li>comanda expirata</li>
-  <li>comanda esuata</li>
-  <li>comanda refuzata</li>
-  <li>comanda completa</li>
-</ul>
+Send an SMS to the client following the following command statuses:
+<UL>
+  <li> command successfully placed </ li>
+  <li> Order in processing </ li>
+  <li> order delivered </ li>
+  <LI> Payment order </ li>
+  <li> command canceled </ li>
+  <li> completed order </ li>
+  <li> order returned </ li>
+  <li> Processed command </ li>
+  <li> Expired order </ li>
+  <Li> Failure of the </ LI>
+  <li> order refused </ li>
+  <LI> Full command </ li>
+</ ul>
 
-Pentru fiecare status de mai sus se poate seta un sablon text care poate sa includa urmatoarele variabile:
-<ul>
-  <li>numar comanda</li>
-  <li>numele clientului</li>
-  <li>prenumele clientului</li>
-  <li>totalul comenzii</li>
-  <li>metoda de livrare</li>
-  <li>data comenzii.</li>
-</ul>
+For each status above, a text template can be set that may include the following variables:
+<UL>
+  <i> Number of command </ li>
+  <i> Customer name </ li>
+  <li> customer's first name </ li>
+  <li> total order </ li>
+  <LI> Delivery method </ li>
+  <li> order date. </ li>
+</ ul>
 
-Se pot activa sau dezactiva anumite statusuri.
+Certain statuses can be activated or disabled.
 
-Dupa ce se seteaza SMSO TOKEN si se salveaza setarile se pot vedea numerele de telefon de pe care se poate trimite SMS-urile si se poate selecta unul dintre ele.
+After SMSO TOKEN sets and saves the settings you can see the phone numbers on which SMS can be sent and one can select one of them.
 
-Instalare cat si dezinstalarea modulului este rapida din interfata de admin Opencart.
+Installation and uninstalling the module is rapid from the OpenCart interface.
 
-Interfata de configurare a modului este intuitiva si simpla.
-
-
-<h3>Instalare</h3>
-Modulul se instaleaza cu ajutorul arhivei ZIP prin intermediul adminului in sectiunea Extensii > Installer apoi butonul Upload, se selecteaza apoi arhiva ZIP din PC si apoi se instaleaza.<br/>
-Dupa instalare modulul se va regasi in lista de module din Extensii > Extensii > si apoi filtrare la tipul de extensie dupa Module.<br/>
-De asemenea din listarea de module din Opencart se poate dezactiva, dezinstala, activa sau configura.
+The mode configuration interface is intuitive and simple.
 
 
-<h3>Configurare</h3>
-Pentru activarea modulul va trebui sa intrati in contul aplicatiei SMSO https://app.smso.ro/ de unde veti lua TOKEN-ul pe care il adaugati in campul TOKEN.<br/>
-Dupa aceasta va trebui sa salvati, iar daca tokenul este valid vi se vor afisa in campul Sender list, numerele de telefon de pe care puteti sa trimiteti SMS-uri precum si costul fiecaruia.<br/>
-Urmatorul pas este sa activati sau sa dezactivati statusurile pentru care se vor trimite SMS-urile si sa modificati textele.<br/>
-La final va fi nevoie sa bifati campul Activate pentru a incepe trimiterea de SMS-uri.<br/>
-La final se va apasa pe butonul Save pentru a salva toate informatiile.
+<h3> Installation </ h3>
+The module is installed using the ZIP archive via the Admin extensions> Installer then the Upload button then selects the ZIP archive in your PC and then installs. <br/>
+After installation, the module will be in the list of extension modules> Extensions> and then filter to the extension type by modules. <br/>
+Also, the listing of modules in OpenCart can be deactivated, uninstall, activate or configure.
+
+<h3> Configuration </ h3>
+To activate the module, you will need to enter the SMSO https://app.smso.ro "application. Where do you get the token you add to the Token field. <br/>
+After that you will have to save, and if the token is valid you will be displayed in the Sender List field, the phone numbers that you can send SMS as well as the cost of each. <br/>
+The next step is to activate or disable the statuses for which SMS will be sent and modify the texts. <br/>
+At the end you will need to check the activated field to start sending SMS. <br/>
+Finally, click the Save button to save all the information. 
